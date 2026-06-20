@@ -1,0 +1,60 @@
+docker/
+├── appdata
+│   ├── bazarr
+│   ├── docker-gc
+│   ├── homepage
+│   ├── jellyfin
+│   ├── jellyseerr
+│   ├── nextcloud-db(ryo)
+│   ├── nextcloud-redis(ryo)
+│   ├── portainer
+│   ├── prowlarr
+│   ├── qbittorrent
+│   ├── radarr
+│   ├── sabnzbd
+│   └── sonarr
+├── backup(v1).env
+├── backup(v2).env
+├── compose
+│   ├── bazarr.yml
+│   ├── docker-gc.yml
+│   ├── dozzle.yml
+│   ├── homepage.yml
+│   ├── immich.yml
+│   ├── jellyfin.yml
+│   ├── jellyseerr.yml
+│   ├── mariadb.yml
+│   ├── nextcloud-db(ryo).yml
+│   ├── nextcloud-redis(ryo).yml
+│   ├── nextcloud(ryo).yml
+│   ├── plex.yml
+│   ├── portainer.yml
+│   ├── postgres
+│   ├── prowlarr.yml
+│   ├── qbittorrent.yml
+│   ├── radarr.yml
+│   ├── sabnzbd.yml
+│   ├── samba(dockurr).yml
+│   ├── socket-proxy.yml
+│   └── sonarr.yml
+├── .env
+├── ForPrepping
+│   ├── FolderMappingPrep.txt
+│   ├── hvalev_mergerfs
+│   ├── ImmichPrepping
+│   ├── NextCloud
+│   └── samba
+├── logs
+│   └── error.log
+├── master-compose.yml
+├── regular_Commands.txt
+├── scripts
+├── secrets
+│   ├── db_password
+│   └── db_root_password
+├── shared
+│   └── config
+├── tree_output1.txt
+└── UFW Commands.txt
+
+27 directories, 31 files

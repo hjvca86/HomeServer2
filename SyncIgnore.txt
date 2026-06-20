@@ -1,0 +1,9 @@
+docker/
+├── appdata/
+├── compose/
+│   ├── postgres/
+├── secrets/
+│   ├── db_password
+│   └── db_root_password
+├── shared/
+│   └── config/

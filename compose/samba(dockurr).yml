@@ -1,0 +1,21 @@
+services:
+  samba:
+    image: dockurr/samba
+    container_name: samba
+    environment:
+      NAME: "MiniPC"
+      USER: "samba"
+      PASS: "secret"
+      RW: true      # Optional, default true
+      UID: $PUID    # Optional, default 1000
+      GID: $PGID    # Optional, default 1000
+    ports:
+      - 445:445
+    volumes:
+      # - ./samba:/storage
+      # - /mnt/Drive3:/storage/Drive3
+      - /mnt/E16a:/storage/E16a
+      # - /mnt/Drive2:/storage/Drive2
+      - /mnt/Int1T:/storage/Int1T
+      # - /mnt/Drive3:/storage2
+    restart: always

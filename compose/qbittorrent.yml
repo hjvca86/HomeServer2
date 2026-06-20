@@ -1,0 +1,29 @@
+services:
+  # qBittorrent - Torrent downloader
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    # profiles: ["apps", "downloads", "all"]
+    networks:
+      - default
+    ports:
+      - "8081:8080"
+    volumes:
+      - $DOCKERDIR/appdata/qbittorrent:/config
+      #- $DATADIR/torrents:/data/torrents # Ensure that downloads folder is set to /data/downloads in qBittorrent
+      - $DATADIR2/torrents:/data/torrents
+    environment:
+      TZ: $TZ
+      PUID: $PUID
+      PGID: $PGID
+      UMASK_SET: 002
+    healthcheck: # https://github.com/qdm12/gluetun/issues/641#issuecomment-933856220
+      test: "curl -sf https://example.com  || exit 1"
+      interval: 1m
+      timeout: 10s
+      retries: 1
+    labels: # Traefik labels added via glueten
+      - "deunhealth.restart.on.unhealthy=true"

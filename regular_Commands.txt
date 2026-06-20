@@ -1,0 +1,39 @@
+sudo docker compose -f master-compose.yml up -d
+
+sudo docker compose -f master-compose.yml down
+
+sudo docker compose -f master-compose.yml pull
+
+
+sudo chown -R testbed:testbed /mnt/Drive2
+sudo chmod -R a=,a+rX,u+w,g+w /mnt/Drive2
+
+sudo chown -R testbed:testbed /mnt/Drive3
+sudo chmod -R a=,a+rX,u+w,g+w /mnt/Drive3
+
+
+
+sudo ufw enable
+sudo ufw status
+
+
+
+/mnt/Drive3/tv /mnt/Drive3/data/media/tv
+	sudo ln -s /mnt/Drive3/tv /mnt/Drive3/data/media/
+
+/mnt/Drive3/films h /mnt/Drive3/data/media/movies 
+	sudo ln -s /mnt/Drive3/movies /mnt/Drive3/data/media/ 
+	
+
+
+## Upload a Google Photos takeout to your Immich server
+immich-go upload from-google-photos --server=http://your-ip:2283 --api-key=your-api-key /path/to/your/takeout-*.zip
+
+immich-go upload from-google-photos --server=http://192.168.1.156:2283 --api-key=zArNEUyPmsw9SvcYU2WuXqrEAFZqSXm1xlW27g3xZU /home/testbed/Downloads/gphotos_takeout/takeout-*.zip
+
+immich-go upload from-folder --server=http://192.168.1.156:2283 --api-key=zArNEUyPmsw9SvcYU2WuXqrEAFZqSXm1xlW27g3xZU "/media/testbed/My Passport/PhotosFromMac"
+
+##immich api key for Henry - full access
+zArNEUyPmsw9SvcYU2WuXqrEAFZqSXm1xlW27g3xZU
+
+

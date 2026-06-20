@@ -1,0 +1,32 @@
+# Nextcloud Database - Using MariaDB, but can also use MySQL or PostgreSQL
+nextcloud-db:
+  # MariaDB 10.5 again not using latest to prevent future breakage <> hc removed the :10.5 to lock in the version
+  image: mariadb
+  # Set to allow easy Docker DNS name resolution - not strictly necessary
+  container_name: nc-db
+  # Same as above
+  hostname: nc-db
+  # Container will restart unless we specifically stop it
+  restart: unless-stopped
+  # Recommended database settings as listed in:
+  # https://docs.nextcloud.com/server/21/admin_manual/configuration_database/linux_database_configuration.html
+  command: --transaction-isolation=READ-COMMITTED --log-bin=msqyld-bin --binlog-format=ROW
+  # Defines how we want our container to connect outside
+  networks:
+    # ONLY using an internal network and not exposing to the internet
+    - nextcloud
+  # Persistent volumes with bind mounts to easily move/backup data
+  volumes:
+    # I like to use the /opt folder to hold my Docker bind mounted volumes
+    - /opt/volumes/nextcloud-db:/var/lib/mysql
+    - $DOCKERDIR/appdata/nextcloud-db(ryo):/config
+  # We add our secrets here
+  secrets:
+    - db_root_password
+    - db_password
+  # Environment (internal to the container) variables to simplify setup (notice the secrets used below)
+  environment:
+    MYSQL_USER: nextcloud
+    MYSQL_DATABASE: nextcloud
+    MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+    MYSQL_PASSWORD_FILE: /run/secrets/db_password

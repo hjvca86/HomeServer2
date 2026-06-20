@@ -1,0 +1,27 @@
+# Nextcloud Docker Application
+nextcloud:
+  # Use the official nextcloud image (v21.0.0 at time of writing this) <>HC 31 is latest when installing removed :21
+  image: nextcloud
+  # Set to allow easy Docker DNS name resolution - not strictly necessary
+  container_name: nextcloud
+  # Same as above
+  hostname: nextcloud
+  # Container will restart unless we specifically stop it
+  restart: unless-stopped
+  # Defines how we want our container to connect outside
+  networks:
+    # Use an internal network for the nextcloud services
+    - nextcloud
+  # Open ports in the format host:container - We will remove this later
+  ports:
+    # INSECURE - we will remove this later after completing a few more steps in this guide
+    - 80:80
+  # Persistent volumes with bind mounts to easily move/backup data
+  volumes:
+    # I like to use the /opt folder to hold my Docker bind mounted volumes
+    - /opt/volumes/nextcloud:/var/www/html
+    - $DOCKERDIR/appdata:/config
+  # Environment (internal to the container) variables to simplify setup
+  environment:
+    # Redis host name (container_name)
+    REDIS_HOST: nc-redis

@@ -1,0 +1,28 @@
+DATADIR2=/mnt/Drive2/data    <-- for torrents/usenet
+DATADIR=/mnt/Drive3/data     <--- for media
+DOWNLOADSDIR=/mnt/Drive3/data   <-- only used in sab - attempting change now
+
+Jellyfin
+- $DATADIR/media:/media   #<-- current
+
+Bazarr
+- $DATADIR/media:/media   #<-- current
+
+qbittorrent
+- $DATADIR/torrents:/data/torrents   #<-- current
+- $DATADIR2/torrents:/data/torrents   #<-- testing
+
+sabnzbd
+- $DOWNLOADSDIR/usenet:/data/usenet:rw   #<-- previous
+- $DATADIR/usenet:/data/usenet:rw   #<-- quickly tested - seems  ok (no change - docker seems to realised it maps to same spot
+- $DATADIR2/usenet:/data/usenet:rw   #<-- testing
+
+radarr
+- $DATADIR:/data   #<-- current/working
+- $DATADIR/movies:/data/movies   #<-- current
+- $DATADIR2:/data    #<-- testing
+
+sonarr
+- $DATADIR:/data    #<-- current/working
+- $DATADIR:/data/tvshows
+- $DATADIR2:/data    #<-- testing

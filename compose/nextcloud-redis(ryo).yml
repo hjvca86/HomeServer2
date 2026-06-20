@@ -1,0 +1,21 @@
+services:
+  # Nextcloud (in memory) Redis Cache - speed up lookup transactions
+  # Speeds up Nextcloud by reducing the time spent "looking" for things
+  nc-redis:
+    # Official REDIS 6.2 image based upon alpine Linux (to keep it lightweight) <> hc removed the :6.2
+    image: redis
+    # Set to allow easy Docker DNS name resolution - not strictly necessary
+    container_name: nc-redis
+    # Same as above
+    hostname: nc-redis
+    # Container will restart unless we specifically stop it
+    restart: unless-stopped
+    # Defines how we want our container to connect outside
+    networks:
+    # ONLY using an internal network and not exposing to the internet
+      - nextcloud
+    # Persistent volumes with bind mounts to easily move/backup data
+    volumes:
+    # I like to use the /opt folder to hold my Docker bind mounted volumes
+      - /opt/volumes/nextcloud-redis:/data
+      - $DOCKERDIR/appdata/nextcloud-redis(ryo):/config

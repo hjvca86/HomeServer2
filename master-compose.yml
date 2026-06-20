@@ -1,0 +1,64 @@
+########################### NETWORKS
+networks:
+  default:
+    driver: bridge
+  socket_proxy:
+    name: socket_proxy
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.91.0/24
+  # Internal facing network for Nextcloud Docker containers
+  nextcloud:
+    name: nextcloud
+    # Define how we want the network created
+    driver: bridge
+########################### SECRETS
+secrets:
+  #plex_claim:
+    #file: $DOCKERDIR/secrets/plex_claim
+#   mysql_root_password:
+ #    file: $DOCKERDIR/secrets/mysql_root_password
+  db_password:
+    file: $DOCKERSECRETSDIR/db_password
+  db_root_password:
+    file: $DOCKERSECRETSDIR/db_root_password
+include:
+  ########################### SERVICES
+  # PREFIX udms = Ultimate Docker Media Server
+  # HOSTNAME=udms - defined in .env
+
+  # CORE
+  - compose/socket-proxy.yml
+  - compose/portainer.yml
+  - compose/dozzle.yml
+  - compose/homepage.yml
+  # MEDIA
+  # - compose/plex.yml
+  - compose/jellyfin.yml
+  # DOWNLOADERS
+  - compose/sabnzbd.yml
+  - compose/qbittorrent.yml
+  # PVRS
+  - compose/radarr.yml
+  - compose/sonarr.yml
+  - compose/prowlarr.yml
+  # COMPLEMENTARY APPS
+  - compose/bazarr.yml
+  - compose/jellyseerr.yml
+  # - compose/tautulli.yml
+  # MONITORING
+  # - compose/uptime-kuma.yml
+  # DATABASES
+  # - compose/mariadb.yml
+  # UTILITIES
+  # - compose/filebrowser.yml
+  - compose/samba(dockurr).yml
+  # MAINTENANCE
+  - compose/docker-gc.yml
+  # IMMICH Related
+  - compose/immich.yml
+  #NEXTCLOUD RELATED
+  - compose/nextcloud(ryo).yml
+  - compose/nextcloud-db(ryo).yml
+  - compose/nextcloud-redis(ryo).yml
